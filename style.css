@@ -30,49 +30,45 @@ main {
 
 
 
-/* HEADER */
+/* ===========================================
+   HERO-HEADER
+=========================================== */
 
 .hero-header {
-  background-image: url('header.jpg');
-  background-position: center;
-  height: 420px;
-  color: #2e88ff !important;
-  position: relative; /* overlay kerros asemoituu oikein */
-  
-  
-  
+  background-image: url('header.jpg'); /* Hero-kuva */
+  background-size: cover;               /* Täyttää koko alueen */
+  background-position: center;          /* Keskitys */
+  height: 420px;                        /* Korkeus desktopissa */
+  position: relative;                   /* Overlay-asetteluun */
 
+  /* Hero-osion alareunan valoefekti */
+  box-shadow:
+    45px 25px 70px rgba(168,197,235,0.4),
+    -15px -15px 25px rgba(46,136,255,0.1);
 }
 
-/* Luodaan headerin päälle tumman läpinäkyvän kerroksen kontrastia varten */
+/* Tumma overlay kuvan päällä (tekstin kontrastiksi) */
 .hero-header::before {
-  content: ""; /* pakollinen näkyvyyden kannalta */
-  position: absolute; /* asetetaan headerin päälle */
-  inset: 0; /* asetetaan reunoihin kiinni joka puolelta */
-  background: rgba(0, 0, 0, 0.75); /* läpinäkyvä musta kerros pehmentää taustakuvaa ja korostaa tekstiä */
-
-}
-
-/* häivytetään headeri kuvan ja mustan taustavärin rajaa */
-.hero-header::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 300px; /* häivytyksen korkeus */
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, #000 100%);
-  z-index: 2; /* tulee headerin sisällön eteen mutta ennen seuraavaa elementtiä */
-  pointer-events: none; /* ei estä klikkauksia */
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 0;
 }
 
-/* Headerin tekstisisältö */
-.hero-content { 
-  position: relative; /* sijoitetaan teksti päällimmäiseksi */
-  height: 100%; /* asettaa tekstin koko alueelle ja keskelle */
+/* Tekstit hero-osion sisällä */
+.hero-content {
+  position: relative;
+  z-index: 1;               /* näkyviin overlayn päälle */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* keskelle pystyyn */
+  align-items: center;      /* keskelle vaakaan */
+  text-align: center;
 }
 
- /* otsikon värit */
+/* Otsikoiden värit ja hehkut */
 .hero-content h1,
 .hero-content h3 {
   color: #fff;
@@ -82,36 +78,76 @@ main {
     0 0 40px rgba(46,136,255,0.8);
 }
 
-/* otsikoiden fontit */
-/* h1 */
-h1, .hero-title { 
+/* Pääotsikko */
+.hero-title {
   font-family: 'Great Vibes', cursive;
   font-size: 130px;
+  margin: 0;
 }
 
-/* alaotsikko h3 */
-.hero-subtitle { 
+/* Alaotsikko */
+.hero-subtitle {
   font-family: 'Great Vibes', cursive;
-  font-size: 60px; 
+  font-size: 60px;
+  margin-top: 10px;
 }
 
-/* NAVBAR LINKIT*/
 
-/* Yksittäisten linkkien ulkoasu navigaatiopalkissa */
-.navbar .nav-link { 
+/* ===========================================
+   NAVBAAR LINKIT
+=========================================== */
+
+.navbar .nav-link {
   color: #fff !important;
-  -webkit-text-stroke: 0.6px #2e88ff; /* sininen ääriviiva tekstiin*/
+  -webkit-text-stroke: 0.6px #2e88ff;
   text-shadow:
-    0 0 6px #2e88ff, /* valo */
-    0 0 20px rgba(46,136,255,0.8); /* hehku */
+    0 0 6px #2e88ff,
+    0 0 20px rgba(46,136,255,0.8);
 }
 
-/* kun kursori on linkkien päällä */
-.navbar .nav-link:hover { 
-  color: #ee0ac8 !important; /* Vaihtaa tekstin värin */
+.navbar .nav-link:hover {
+  color: #ee0ac8 !important;
   text-shadow:
-    0 0 38px #e9a2d9, /* sisähehku */
-    0 0 60px rgb(245, 239, 245); /* kirkkaampi ulkoreuna */
+    0 0 38px #e9a2d9,
+    0 0 60px rgb(245,239,245);
+}
+
+
+/* ===========================================
+   MOBIILISÄÄDÖT — ratkaisee kasaan menemisen
+=========================================== */
+
+@media (max-width: 992px) {
+
+  .hero-header {
+    height: 320px;          /* matalampi puhelimella */
+    padding-top: 90px;      /* antaa tilaa naville */
+  }
+
+  .hero-title {
+    font-size: 60px;        /* pienemmät fontit */
+  }
+
+  .hero-subtitle {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .hero-header {
+    height: 260px;
+    padding-top: 100px;     /* mobiilissa navbar + header */
+
+  }
+
+  .hero-title {
+    font-size: 46px;
+  }
+
+  .hero-subtitle {
+    font-size: 26px;
+  }
 }
 
 
