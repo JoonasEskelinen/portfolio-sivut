@@ -129,9 +129,15 @@ main {
 
 @media (max-width: 992px) {
 
+  
+  .hero-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
   .hero-header {
     height: 320px;      /* matalampi puhelimella */
-    padding-top: 90px;  /* antaa tilaa naville */
   }
 
   .hero-title {
@@ -145,9 +151,15 @@ main {
 
 @media (max-width: 600px) {
 
+  
+  .hero-content {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  
+  
   .hero-header {
     height: 260px;
-    padding-top: 100px;     /* mobiilissa navbar + header */
 
   }
 
@@ -160,11 +172,6 @@ main {
   }
 }
 
-@media (max-width: 600px) {
-  .hero-content {
-    padding-bottom: 40px; /* nostaa tekstialuetta ylöspäin */
-  }
-}
 
 
 
