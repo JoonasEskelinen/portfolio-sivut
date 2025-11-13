@@ -110,13 +110,24 @@
   </div>
 </main>
 
-<!-- footer-->
+<!-- footer -->
 <footer class="bg-black text-white text-center py-4">
-  <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
-  <a href="mailto:joonas_eskelinen@hotmail.com" class="btn btn-outline-light btn-sm me-2">Sähköposti</a>
-  <a href="https://github.com/JoonasEskelinen" class="btn btn-outline-light btn-sm">GitHub</a>
+    <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
+    <a href="mailto:joonas_eskelinen@hotmail.com" class="btn">Sähköposti</a>
+    <a href="https://github.com/JoonasEskelinen" class="btn">GitHub</a>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS-->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+  crossorigin="anonymous">
+</script>
+
+<!-- Mobiilin sivunavigaatio -->
+<div class="mobile-nav-bottom">
+    <a href="tyonaytteet.html" class="mobile-nav-btn">⬅️</a>
+</div>
+
 </body>
 </html>

@@ -221,7 +221,7 @@
       <div class="neu-box text-center h-100"   style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
         <h3>Linkkejä:</h3>
         <p>Verenpaineen seurantaan
-        <a href="https://sydan.fi/fakta/verenpaineen-omaseuranta/" target="_blank" style="color: #66ccff; text-decoration: underline;"> https://sydan.fi/fakta/verenpaineen-omaseuranta/</a><br>
+        <a href="https://sydan.fi/fakta/verenpaineen-omaseuranta/" target="_blank" style="color: #66ccff; text-decoration: underline;"> https://sydan.fi/fakta/verenpaineen-omaseuranta/</a><br><br>
         <a href="https://www.mehilainen.fi/sydan-ja-verisuonitaudit/verenpaine" target="_blank" style="color: #66ccff; text-decoration: underline;"> https://www.mehilainen.fi/sydan-ja-verisuonitaudit/verenpaine</a></p>
         
         <p>Liikuntasuosituksia
@@ -296,11 +296,24 @@
  
 
 <!-- footer -->
-  <footer class="bg-black text-white text-center py-4">
+<footer class="bg-black text-white text-center py-4">
     <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
     <a href="mailto:joonas_eskelinen@hotmail.com" class="btn">Sähköposti</a>
     <a href="https://github.com/JoonasEskelinen" class="btn">GitHub</a>
-  </footer>
+</footer>
 
-  </body>
-  </html>
+<!-- Bootstrap JS-->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+  crossorigin="anonymous">
+</script>
+
+<!-- Mobiilin sivunavigaatio -->
+<div class="mobile-nav-bottom">
+    <a href="historia.html" class="mobile-nav-btn">⬅️</a>
+    <a href="taidot.html" class="mobile-nav-btn">➡️</a>
+</div>
+
+</body>
+</html>

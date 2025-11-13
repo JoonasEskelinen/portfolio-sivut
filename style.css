@@ -26,9 +26,7 @@ main {
 
 
 
-/* ===========================================
-   HERO-HEADER
-=========================================== */
+/* HERO-HEADER */
 
 .hero-header {
   background-image: url('header.jpg'); 
@@ -162,6 +160,59 @@ main {
   }
 }
 
+@media (max-width: 600px) {
+  .hero-content {
+    padding-bottom: 40px; /* nostaa tekstialuetta ylöspäin */
+  }
+}
+
+
+
+
+
+
+
+/* Mobiilin oma navigaatio sivun alareunaan  */
+.mobile-nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 9999;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Napit */
+.mobile-nav-btn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 12px rgba(46,136,255,0.25);
+}
+
+/* Hover-efekti */
+.mobile-nav-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* --- Näkyy vain mobiilissa --- */
+@media (min-width: 992px) {
+  .mobile-nav-bottom {
+    display: none;
+  }
+}
+
+
+
 
 
 
@@ -292,6 +343,15 @@ main {
 .neu-box-visa label:hover { 
   background-color: #6e6c6c; 
 }
+
+
+.neu-box a {
+  word-break: break-all;       /* sallii pitkien linkkien katkeamisen */
+  overflow-wrap: anywhere;     /* varmistaa rivittymisen pienissä näytöissä */
+  display: inline-block;       /* varmempi rivittyminen */
+}
+
+
 
 /* Radiopainikkeiden tyyli */
 .neu-box-visa input[type="radio"] { 
