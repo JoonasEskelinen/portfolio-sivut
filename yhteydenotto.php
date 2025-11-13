@@ -59,54 +59,85 @@
   </div>
 </header>
 
-<!-- lomake -->
+
+    <!-- lomakkeen tallennus -->
+    <?php
+
+    // Alustetaan muuttujat tyhjiksi, jotta voidaan täyttää lomake uudelleen tarvittaessa
+    $nimi = $sahkoposti = $puhelin = $viesti = "";
+    $viesti_html = "";
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      // Haetaan ja siivotaan syötteet
+      $nimi = trim($_POST["nimi"] ?? "");
+      $sahkoposti = trim($_POST["sahkoposti"] ?? "");
+      $puhelin = trim($_POST["puhelin"] ?? "");
+      $viesti = trim($_POST["viesti"] ?? "");
+    
+      //tarkistetaan että sähköposti oikein
+      if (!filter_var($sahkoposti, FILTER_VALIDATE_EMAIL)) {
+        $virheviesti = "<div class='alert alert-danger mt-4'>Virheellinen sähköpostiosoite.</div>";
+      
+      //tarkistetaan että kaikki kentät täytetty
+      } elseif (empty($nimi) || empty($puhelin) || empty($viesti)) {
+        $virheviesti = "<div class='alert alert-danger mt-4'>Täytä kaikki kentät.</div>";
+      } else {
+        //luodaan uusi rivi
+        $rivi = str_replace(["\r", "\n"], " ", "$nimi, $sahkoposti, $puhelin, $viesti");
+
+        // tallennetaan tiedostoon UTF-8-muodossa
+        file_put_contents("yhteydenotot.txt", $rivi . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+        $viesti_html = "<div class='alert alert-success mt-4'>Kiitos viestistäsi! 😊</div>";
+
+        // tyhjennetään kentät onnistuneen lähetyksen jälkeen
+        $nimi = $sahkoposti = $puhelin = $viesti = "";
+    }
+}
+?>
+    
+    
+
+
+<!-- LOMAKE -->
 <main class="container my-5 pt-hero-gap">
   <div class="neu-box mx-auto" style="max-width: 600px;">
     <h2 class="text-center mb-4">Yhteydenottolomake</h2>
 
-    <form action="" method="post">
+    
+    <!-- luodaan turvallinen lomake, html specialchars estää erikoismerkit ja en_quotes muuntaa myös yksittäiset heittomerkit --> 
+    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" novalidate>
       <div class="mb-3">
         <label class="form-label">Nimi:</label>
-        <input type="text" name="nimi" class="form-control" required>
+        <input type="text" name="nimi" class="form-control" required
+               value="<?= htmlspecialchars($nimi, ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Sähköposti:</label>
-        <input type="email" name="sahkoposti" class="form-control" required>
+        <input type="email" name="sahkoposti" class="form-control" required
+               value="<?= htmlspecialchars($sahkoposti, ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Puhelin:</label>
-        <input type="text" name="puhelin" class="form-control" required>
+        <input type="text" name="puhelin" class="form-control" required
+               value="<?= htmlspecialchars($puhelin, ENT_QUOTES, 'UTF-8') ?>">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Viesti:</label>
-        <textarea name="viesti" rows="5" class="form-control" placeholder="Jätä viestisi tähän..."></textarea>
+        <textarea name="viesti" rows="5" class="form-control"
+                  placeholder="Jätä viestisi tähän..."><?= htmlspecialchars($viesti, ENT_QUOTES, 'UTF-8') ?></textarea>
       </div>
 
       <div class="text-center">
-        <input type="submit" value="Lähetä viesti" class="btn">
+        <input type="submit" value="Lähetä viesti" class="btn btn-primary">
       </div>
     </form>
 
-    <!-- lomakkeen tallennus -->
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $nimi = $_POST["nimi"];
-        $sahkoposti = $_POST["sahkoposti"];
-        $puhelin = $_POST["puhelin"];
-        $viesti = $_POST["viesti"];
-
-        if (!filter_var($sahkoposti, FILTER_VALIDATE_EMAIL)) {
-            echo "<div class='alert alert-danger mt-4'>Virheellinen sähköpostiosoite.</div>";
-        } else {
-            $rivi = "$nimi, $sahkoposti, $puhelin, $viesti" . PHP_EOL;
-            file_put_contents("yhteydenotot.txt", $rivi, FILE_APPEND);
-            echo "<div class='alert alert-success mt-4'>Kiitos viestistäsi! 😊</div>";
-        }
-    }
-    ?>
+    <!-- Viesti (onnistuminen tai virhe) -->
+    <?= $viesti_html ?>
   </div>
 </main>
 
