@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Google-fontit -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="style.css">
@@ -55,7 +55,6 @@
   <div class="hero-content text-center d-flex flex-column justify-content-center align-items-center">
     <div class="container">
       <h1 class="hero-title">Ota yhteyttä</h1>
-      <h3 class="hero-subtitle">Jätä viestisi alla olevalla lomakkeella</h3>
     </div>
   </div>
 </header>

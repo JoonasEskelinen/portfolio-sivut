@@ -2,13 +2,7 @@ html, body {
   display: flex; /* Määrittää sivun joustavasti asetelluksi */
   flex-direction: column; /* elementit pystysuoraan */
   min-height: 100vh; /* koko selaimen korkeudelle */
-  
-  /* taustavalo sivulle joka tulee vasemmasta yläkulmasta header osion alta */
-  background: radial-gradient(circle at top left,
-  rgba(168,197,235,0.45) 5%, 
-  rgba(46,136,255,0.15) 25%, 
-  rgba(0,0,0,1) 50%
-);
+  background: black;
 }
 
 main { 
@@ -30,21 +24,19 @@ main {
 
 
 
+
+
 /* ===========================================
    HERO-HEADER
 =========================================== */
 
 .hero-header {
-  background-image: url('header.jpg'); /* Hero-kuva */
+  background-image: url('header.jpg'); 
   background-size: cover;               /* Täyttää koko alueen */
-  background-position: center;          /* Keskitys */
-  height: 420px;                        /* Korkeus desktopissa */
-  position: relative;                   /* Overlay-asetteluun */
+  background-position: center; 
+  height: 420px; 
+  position: relative;  /* Overlay-asetteluun */
 
-  /* Hero-osion alareunan valoefekti */
-  box-shadow:
-    45px 25px 70px rgba(168,197,235,0.4),
-    -15px -15px 25px rgba(46,136,255,0.1);
 }
 
 /* Tumma overlay kuvan päällä (tekstin kontrastiksi) */
@@ -55,6 +47,29 @@ main {
   background: rgba(0,0,0,0.75);
   z-index: 0;
 }
+
+
+/* headerin alareuna sulautumaan bodyn mustan taustan kanssa */
+.hero-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 120px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.4) 10%,
+    rgba(0,0,0,0.75) 25%,
+    rgba(0,0,0,1) 100%
+  );
+
+  z-index: 2; /* overlayn päälle */
+  pointer-events: none;
+}
+
 
 /* Tekstit hero-osion sisällä */
 .hero-content {
@@ -75,27 +90,26 @@ main {
   text-shadow:
     0 0 8px #2e88ff,
     0 0 16px #2e88ff,
-    0 0 40px rgba(46,136,255,0.8);
+    0 0 80px rgba(46,136,255,0.8);
 }
 
 /* Pääotsikko */
 .hero-title {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Allura', cursive;
+  font-weight: 700;
   font-size: 130px;
   margin: 0;
 }
 
 /* Alaotsikko */
 .hero-subtitle {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Allura', cursive;
   font-size: 60px;
   margin-top: 10px;
 }
 
 
-/* ===========================================
-   NAVBAAR LINKIT
-=========================================== */
+/*  NAVBAAR LINKIT */
 
 .navbar .nav-link {
   color: #fff !important;
@@ -113,19 +127,17 @@ main {
 }
 
 
-/* ===========================================
-   MOBIILISÄÄDÖT — ratkaisee kasaan menemisen
-=========================================== */
+/*  säädetään toimimaan kaikilla laitteilla */
 
 @media (max-width: 992px) {
 
   .hero-header {
-    height: 320px;          /* matalampi puhelimella */
-    padding-top: 90px;      /* antaa tilaa naville */
+    height: 320px;      /* matalampi puhelimella */
+    padding-top: 90px;  /* antaa tilaa naville */
   }
 
   .hero-title {
-    font-size: 60px;        /* pienemmät fontit */
+    font-size: 60px;    /* pienemmät fontit */
   }
 
   .hero-subtitle {
@@ -163,18 +175,20 @@ main {
 
 /* PROFIILIKUVA ETUSIVULLA */
 
+
+
 .omakuva {
   width: 100%;
   max-width: 300px;
   height: auto;
-  border-radius: 90px; /* kulmien pyöristys  */
-  box-shadow: 30px 30px 45px #6c7177;
+  border-radius: 12px; /* kulmien pyöristys  */
+  box-shadow: 0 0 200px rgba(46,136,255,0.15)
 }
 
-/* kun kursori on kuvan päällä */
-.omakuva:hover { 
-  box-shadow: 28px 28px 35px #a8c5eb;
-  transform: translateY(-10px); /* nostetaan kuvaa kun kursori päällä */
+/* kun kursori kuvan päällä */
+.omakuva:hover {
+  transform: translateY(-6px) scale(1.03) rotate(0.5deg);
+  filter: drop-shadow(0 0 55px rgba(46,136,255,0.55));
 }
 
 
@@ -189,21 +203,19 @@ main {
 
 /* NEU-BOXIT*/
 
-.neu-box { 
-  display: flex;
-  background: #1a1a1a;
-  border-radius: 90px; /* kulmien pyöristys */
-  box-shadow: 30px 30px 45px #6c7177;
-  color: white; /* tekstiväri */
-  padding: 2rem; /* sisätilaa laatikon sisälle */
-  justify-content: center;   /* Keskittää pystysuunnassa */
-  flex-direction: column;           /* Asettaa elementit päällekkäin */
-    height: 100%;                     /* Täyttää korkeuden (toimii, jos vanhempi col-md-4 on venytetty) */
+.neu-box {
+  background: rgba(0,0,0,0.3);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+
+  box-shadow: 
+  0 0 150px rgba(46,136,255,0.15); /* hienovarainen sininen glow */
 }
 
 /* kun kursori on neu-boxin päällä */
 .neu-box:hover { 
-  box-shadow: 35px 35px 40px #a8c5eb;
+  box-shadow: 20px 20px 40px #a8c5eb, -20px -20px 40px #a8c5eb
 
 }
 
@@ -228,9 +240,9 @@ main {
 .neu-box input[type="date"],
 .neu-box textarea {
   width: 80%;     /* 80 % laatikon sisätilasta */
-  background: #383737; /* Harmaa tausta */
+  background: white; /* Harmaa tausta */
   border: none;    /* Ei reunaviivaa */
-  color: white;  /* valkoinen teksti */
+  color: black;  /* valkoinen teksti */
   padding: 0.4rem;  /* Sisätila kentän sisälle */
   border-radius: 10px;  /* Pyöristetyt reunat */
   margin-top: 5px;    /* Väli ylempään elementtiin */
@@ -242,9 +254,9 @@ main {
 
 /* TIETOVISA- LAATIKOT (neu- box-visa) */
 .neu-box-visa { 
-  background: #1a1a1a; 
-  border-radius: 40px; 
-  box-shadow: 8px 8px 16px #a8c5eb, -8px -8px 16px #a8c5eb; 
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px; 
+  box-shadow: 0 0 150px rgba(46,136,255,0.15); /* hienovarainen sininen glow */
   color: #eaeaea; 
   padding: 1.5rem 3rem; /* vähemmän pystysuuntaista, enemmän vaakasuuntaista tilaa */
   font-family: 'Poppins', sans-serif;
@@ -261,8 +273,8 @@ main {
 /* Tietovisakysymyksen otsikko */
 .neu-box-visa h4 { 
   color: #fff; 
-  font-weight: 600; /* Puolilihava tyyli */
-  margin-bottom: 1.2rem; /* Väli otsikon ja vastausten välille */
+  font-weight: 600; 
+  margin-bottom: 2rem; /* Väli otsikon ja vastausten välille */
 }
 
 /* Jokainen vastausvaihtoehto näkyy labelina */

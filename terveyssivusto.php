@@ -8,8 +8,8 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google-fontit -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- fontit -->
+    <<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="style.css">

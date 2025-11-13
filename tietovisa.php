@@ -54,10 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Joonas Eskelinen - Tietovisa</title>
 
-        <!-- Bootstrap ja oma tyyli -->
+        <!-- Bootstrap, oma tyyli ja fontti -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
         <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     </head>
 
 <body>
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <div class="hero-content text-center d-flex flex-column justify-content-center align-items-center">
     <div class="container">
       <h1 class="hero-title">Testaa tietosi</h1>
-      <h3 class="hero-subtitle">Luvassa palkinto!</h3>
+      <h3 class="hero-subtitle">10/10 vastanneille palkinto!</h3>
     </div>
   </div>
 </header>
@@ -162,10 +162,10 @@ HTML;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joonas Eskelinen - Tietovisa</title>
 
-  <!-- Bootstrap ja oma tyyli -->
+  <!-- Bootstrap, oma tyyli ja fontit -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -208,7 +208,7 @@ HTML;
   <div class="hero-content text-center d-flex flex-column justify-content-center align-items-center">
     <div class="container">
       <h1 class="hero-title">Testaa tietosi</h1>
-      <h3 class="hero-subtitle">Luvassa palkinto!</h3>
+      <h3 class="hero-subtitle">10/10 vastanneille palkinto!</h3>
     </div>
   </div>
 </header>
