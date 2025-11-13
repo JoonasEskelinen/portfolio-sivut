@@ -16,7 +16,7 @@ main {
 
 /* navbar */
 .navbar {
-  background: rgba(0, 0, 0, 0.75); /* osittain läpinäkyvä */
+  background: rgba(0, 0, 0, 0.65); /* osittain läpinäkyvä */
 }
 
 
@@ -177,60 +177,6 @@ main {
 
 
 
-
-
-/* Mobiilin oma navigaatio sivun alareunaan  */
-.mobile-nav-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 9999;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Napit */
-.mobile-nav-btn {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.05);
-  box-shadow: 0 0 12px rgba(46,136,255,0.25);
-}
-
-/* Hover-efekti */
-.mobile-nav-btn:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-/* --- Näkyy vain mobiilissa --- */
-@media (min-width: 992px) {
-  .mobile-nav-bottom {
-    display: none;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* PROFIILIKUVA ETUSIVULLA */
 
 
@@ -240,7 +186,7 @@ main {
   max-width: 300px;
   height: auto;
   border-radius: 12px; /* kulmien pyöristys  */
-  box-shadow: 0 0 200px rgba(46,136,255,0.15)
+  box-shadow: 0 0 350px rgba(46,136,255,0.35)
 }
 
 /* kun kursori kuvan päällä */
@@ -268,7 +214,7 @@ main {
   color: white;
 
   box-shadow: 
-  0 0 150px rgba(46,136,255,0.15); /* hienovarainen sininen glow */
+  0 0 150px rgba(46,136,255,0.25); /* hienovarainen sininen glow */
 }
 
 /* kun kursori on neu-boxin päällä */
@@ -314,7 +260,7 @@ main {
 .neu-box-visa { 
   background: rgba(0,0,0,0.3);
   border-radius: 12px; 
-  box-shadow: 0 0 150px rgba(46,136,255,0.15); /* hienovarainen sininen glow */
+  box-shadow: 0 0 150px rgba(46,136,255,0.20); /* hienovarainen sininen glow */
   color: #eaeaea; 
   padding: 1.5rem 3rem; /* vähemmän pystysuuntaista, enemmän vaakasuuntaista tilaa */
   font-family: 'Poppins', sans-serif;
