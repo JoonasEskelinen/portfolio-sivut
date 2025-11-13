@@ -155,10 +155,6 @@
   crossorigin="anonymous">
 </script>
 
-<!-- Mobiilin sivunavigaatio -->
-<div class="mobile-nav-bottom">
-    <a href="tyonaytteet.html" class="mobile-nav-btn">⬅️</a>
-</div>
 
 </body>
 </html>
