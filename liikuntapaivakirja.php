@@ -8,8 +8,8 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google-fontit -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- fontit -->
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
     <!-- Oma CSS -->
     <link rel="stylesheet" href="style.css">
@@ -52,15 +52,18 @@
 
     <?php
     // jos lomake lähetetty
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nimimerkki"])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["nimi"])) {
 
-        // Luetaan nimimerkki ja siistitään mahdolliset ylimääräiset merkit
-        $nimimerkki = trim($_POST["nimimerkki"]);
+      //haetaan nimi  
+      $nimi = trim($_POST["nimi"]);
+      
+      // vain turvalliset merkit
+        $nimi = preg_replace("/[^a-zA-Z0-9_]/", "", $nimi);
 
         // määritetään tiedoston nimi
-        $tiedosto = "liikuntapaivakirja_" . $nimimerkki . ".txt";
+        $tiedosto = "liikuntapaivakirja_" . $nimi . ".txt";
 
-        echo "<h4>Päiväkirjasi: $nimimerkki</h4><br>";
+        echo "<h4>Päiväkirjasi: " . htmlspecialchars($nimi, ENT_QUOTES, 'UTF-8') . "</h4><br>";
 
         // tarkistetaan löytyykö tiedosto
         if (file_exists($tiedosto)) {
@@ -73,22 +76,22 @@
                 //tässä tulostetaan tiedot
                 echo "<ul>";
                 foreach (array_reverse($rivit) as $rivi) {
-                    echo "<li>" . htmlspecialchars($rivi) . "</li><hr>";
+                    echo "<li>" . htmlspecialchars($rivi, ENT_QUOTES, 'UTF-8') . "</li><hr>";
                 }
                 echo "</ul>";
             }
         } 
         //jos nimimerkillä ei löydy vielä tietoja
         else {
-            echo "<p style='color:red;'>Ei löytynyt päiväkirjaa nimimerkillä $nimimerkki.</p>";
+            echo "<p style='color:red;'>Ei löytynyt päiväkirjaa nimimerkillä " . htmlspecialchars($nimi, ENT_QUOTES, 'UTF-8') . ".</p>";
         }
     }
     ?>
 
     <!-- lomake -->
     <form method="POST" class="mt-3">
-      <label for="nimimerkki">Syötä nimimerkki:</label><br>
-      <input type="text" name="nimimerkki" id="nimimerkki" >
+      <label for="nimi">Syötä nimi:</label><br>
+      <input type="text" name="nimi" id="nimi" >
       <button type="submit" class="btn btn-visa mt-2">Näytä päiväkirja</button>
     </form>
 

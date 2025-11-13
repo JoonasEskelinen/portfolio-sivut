@@ -75,34 +75,34 @@
      <h3>Painoindeksilaskuri</h3>
 
     <!-- kysytään käyttäjältä paino ja pituus -->
-    <form method="POST" action="">
+    <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
       <div class="mb-3">
         <label for="paino">Paino (kg):</label><br>
-        <input name="paino" id="paino" type="number" required>
+        <input name="paino" id="paino" type="number" step="any" required>
       </div>
 
       <div class="mb-3">
         <label for="pituus">Pituus (cm):</label><br>
-        <input name="pituus" id="pituus" type="number" required>
+        <input name="pituus" id="pituus" type="number" step="any" required>
       </div>
-
+      <br>
       <button type="submit" class="btn">Laske painoindeksi</button>
-      <button type="reset" class="btn">Nollaa luvut</button>
     </form>
 
     <?php
     // lasketaan painoindeksi php avulla ja tarkistetaan että tiedot on syötetty
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["paino"], $_POST["pituus"])) {
         
-        // alustetaan paino ja pituus 
-        $paino = (float) $_POST["paino"];
-        $pituus = (float) $_POST["pituus"];
+        // haetaan tiedot turvallisesti 
+            $paino = filter_input(INPUT_POST, "paino", FILTER_VALIDATE_FLOAT);
+            $pituus = filter_input(INPUT_POST, "pituus", FILTER_VALIDATE_FLOAT);
 
-        $pituusmetrit = ($pituus / 100);
-        $painoindeksi = ($paino*1.3) / pow($pituusmetrit,2.5);
+        if ($paino && $pituus && $pituus > 0) {
+                $pituusmetrit = $pituus / 100;
+                $painoindeksi = ($paino * 1.3) / pow($pituusmetrit, 2.5);
 
-            //tulostetaan painoindeksi
-            echo "<p><strong>Painoindeksi: {$painoindeksi}</strong></p>";
+            // Tulostetaan turvallisesti
+                echo "<p><strong>Painoindeksi: " . htmlspecialchars(number_format($painoindeksi, 1), ENT_QUOTES, 'UTF-8') . "</strong></p>";
 
             // lisätään kommentti painoindeksin mukaan
             if ($painoindeksi < 18.5) {
@@ -113,6 +113,11 @@
                 echo "<p>Paino on lievästi ylipainoinen.</p>";
             } else {
                 echo "<p>Paino on merkittävästi ylipainoinen.</p>";
+            }
+          }
+          
+            else {
+                echo "<p class='text-danger'>Syötä kelvolliset luvut painolle ja pituudelle.</p>";
             }
         } 
     ?>
@@ -126,54 +131,62 @@
 
 <!-- liikuntapäiväkirja -->
 <div class="col-md-4">
-  <div class="neu-box text-center h-100"   style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div class="neu-box text-center h-100" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
     <h3>Liikuntapäiväkirja</h3>
     <p>Päiväkirja tallentuu nimimerkin mukaan, joten voit tehdä oman henkilökohtaisen päiväkirjan.</p>
 
     <?php
-    // jos lomake lähetetään
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["pvm"], $_POST["laji"], $_POST["kesto"], $_POST["nimimerkki"])) {
+    // Jos lomake on lähetetty POST-metodilla
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        // luetaan tiedot
-        $nimimerkki = trim($_POST["nimimerkki"]);
-        $pvm = trim($_POST["pvm"]);
-        $laji = trim($_POST["laji"]);
-        $kesto = trim($_POST["kesto"]);
-        $tuntemukset = trim($_POST["tuntemukset"] ?? "");
+        // Haetaan ja siistitään käyttäjän syötteet
+        $nimi   = trim($_POST["nimi"] ?? "");
+        $pvm          = trim($_POST["pvm"] ?? "");
+        $laji         = trim($_POST["laji"] ?? "");
+        $kesto        = trim($_POST["kesto"] ?? "");
+        $tuntemukset  = trim($_POST["tuntemukset"] ?? "");
 
-        // luodaan tekstitiedosto nimimerkin perusteella
-        $tiedosto = "liikuntapaivakirja_" . $nimimerkki . ".txt";
+        // Sallitaan vain kirjaimet, numerot ja alaviiva nimimerkkiin
+        $nimi = preg_replace("/[^a-zA-Z0-9_]/", "", $nimi);
 
-        // tarkistetaan onko pakolliset kentät syötetty, tuntemukset kenttä ei pakollinen
-        if ($nimimerkki && $pvm && $laji && $kesto) {
+        // luodaan tekstitiedosto jokaiselle nimimerkille
+        $tiedosto = "liikuntapaivakirja_" . $nimi . ".txt";
 
-            // luodaan tallennetta rivi
+        // tarkistetaan pakolliset kentät
+        if ($nimi && $pvm && $laji && $kesto) {
+
+            // siistitään data (ei rivinvaihtoja)
+            $pvm = str_replace(["\r", "\n"], " ", $pvm);
+            $laji = str_replace(["\r", "\n"], " ", $laji);
+            $kesto = str_replace(["\r", "\n"], " ", $kesto);
+            $tuntemukset = str_replace(["\r", "\n"], " ", $tuntemukset);
+
+            // luodaan tallennettava rivi (tuntemukset ei pakollinen)
             $rivi = "$pvm | $laji | $kesto min";
             if ($tuntemukset !== "") {
                 $rivi .= " | $tuntemukset";
             }
-            $rivi .= "\n";
+            $rivi .= PHP_EOL; // rivinvaihto
 
-            // tallennetaan teksitiedostoon
-            file_put_contents($tiedosto, $rivi, FILE_APPEND);
+            // tallennetaan tiedostoon turvallisesti (lukitus estää kilpailutilanteet)
+            file_put_contents($tiedosto, $rivi, FILE_APPEND | LOCK_EX);
 
-           // jos kaikki ok, näytetään viesti 
-            echo "<p style='color:#00ff99;'>✅ Merkintä tallennettu nimimerkillä $nimimerkki</p>";
+            // tulostetaan onnistumisviesti turvallisesti
+            echo "<p style='color:#00ff99;'>✅ Merkintä tallennettu nimellä " . htmlspecialchars($nimi, ENT_QUOTES, 'UTF-8') . "</p>";
 
         } else {
-            // jos joku kenttä jäi tyhjäksi
+            // --- Jos pakollinen kenttä puuttuu ---
             echo "<p style='color:red;'>Täytä kaikki pakolliset kentät (nimimerkki, päivämäärä, laji ja kesto).</p>";
         }
     }
     ?>
 
-       <!-- lomake -->
-    <form method="POST" action="terveyssivusto.php">
-
+    <!-- Lomake -->
+    <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
       <div class="mb-3">
-        <label for="nimimerkki">Nimimerkki:</label><br>
-        <input type="text" name="nimimerkki" id="nimimerkki" >
+        <label for="nimi">Nimi:</label><br>
+        <input type="text" name="nimi" id="nimi" required>
       </div>
 
       <div class="mb-3">
@@ -188,11 +201,11 @@
 
       <div class="mb-3">
         <label for="kesto">Kesto (min):</label><br>
-        <input type="number" name="kesto" id="kesto" required>
+        <input type="number" name="kesto" id="kesto" min="1" required>
       </div>
 
       <div class="mb-3">
-        <label for="fiilis">Oliko lisätuntemuksia?<br>(Valinnainen)</label><br>
+        <label for="tuntemukset">Oliko lisätuntemuksia?<br>(Valinnainen)</label><br>
         <input type="text" name="tuntemukset" id="tuntemukset" placeholder="Esim. voimattomuus">
       </div>
 
@@ -202,7 +215,7 @@
 
     <br>
 
-    <!-- linkki päiväkirjaan -->
+    <!-- Linkki päiväkirjaan -->
     <a href="liikuntapaivakirja.php" class="btn">Näytä päiväkirja</a>
 
   </div>

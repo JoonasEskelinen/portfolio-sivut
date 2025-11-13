@@ -17,9 +17,12 @@ $kysymykset = [
     ["k" => "Mikä on maailman suosituin suoratoistopalvelu musiikille(2025)?", "v" => ["Spotify", "Apple music", "Deezer"], "oikein" => "Spotify"]
 ];
 
+
 // Tarkistetaan, onko lomake lähetetty
 if ($_SERVER["REQUEST_METHOD"] === "POST") {   
-    $nimimerkki = trim($_POST["nimimerkki"]);
+    // siistitään nimimerkki, vain sallitut merkit
+    $nimimerkki = trim($_POST["nimimerkki"] ?? '');
+    $nimimerkki = preg_replace("/[^a-zA-Z0-9_]/", "", $nimimerkki);
     $vastaukset = $_POST["vastaukset"] ?? [];
     $pisteet = 0;                           
 
@@ -100,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <div class="hero-content text-center d-flex flex-column justify-content-center align-items-center">
     <div class="container">
       <h1 class="hero-title">Testaa tietosi</h1>
-      <h3 class="hero-subtitle">10/10 vastanneille palkinto!</h3>
+      <h3 class="hero-subtitle">10/10 vastanneille tulostuu palkinto!</h3>
     </div>
   </div>
 </header>
@@ -208,7 +211,7 @@ HTML;
   <div class="hero-content text-center d-flex flex-column justify-content-center align-items-center">
     <div class="container">
       <h1 class="hero-title">Testaa tietosi</h1>
-      <h3 class="hero-subtitle">10/10 vastanneille palkinto!</h3>
+      <h3 class="hero-subtitle">10/10 vastanneille tulostuu palkinto!</h3>
     </div>
   </div>
 </header>
@@ -217,11 +220,18 @@ HTML;
   <main class="container my-5 pt-hero-gap">
     <form method="POST" action="tietovisa.php">
 
-      <!-- nimimerkki -->
+      <!-- turvallinen nimimerkki -->
       <div class="neu-box-visa text-center mb-4">
-        <h4>Kirjoita nimimerkkisi</h4>
-        <input type="text" name="nimimerkki" required class="form-control" placeholder="Nimimerkki">
-      </div>
+      <h4>Kirjoita nimimerkkisi</h4>
+      <input type="text" 
+         name="nimimerkki" 
+         required 
+         class="form-control" 
+         placeholder="Vain kirjaimet, numerot ja alaviiva" 
+         maxlength="20" 
+         pattern="[a-zA-Z0-9_]+" 
+         title="Vain kirjaimet, numerot ja alaviiva sallittu">
+        </div>
 
       <!-- tulostetaan kysymykset PHP:n avulla -->
       <?php foreach ($kysymykset as $index => $kysymys): ?>
