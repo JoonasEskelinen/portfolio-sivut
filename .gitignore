@@ -1,0 +1,17 @@
+# PHP ja kehitysympäristö
+vendor/
+.env
+*.log
+
+#visual studio code -asetukset
+.vscode/
+*.code-workspace
+
+#käyttöjärjestelmän piilotiedostot
+.DS_Store
+Thumbs.db
+
+#Harjoitusdata ja logit
+data/
+uploads/
+tmp/
