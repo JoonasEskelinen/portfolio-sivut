@@ -23,21 +23,18 @@ main {
 
 
 
-
-
-
 /* HERO-HEADER */
 
 .hero-header {
   background-image: url('header.jpg'); 
-  background-size: cover;               /* Täyttää koko alueen */
+  background-size: cover;
   background-position: center; 
   height: 420px; 
-  position: relative;  /* Overlay-asetteluun */
+  position: relative;  /* overlay-asetteluun */
 
 }
 
-/* Tumma overlay kuvan päällä (tekstin kontrastiksi) */
+/* tumma overlay kuvan päällä*/
 .hero-header::before {
   content: "";
   position: absolute;
@@ -99,7 +96,7 @@ main {
   margin: 0;
 }
 
-/* Alaotsikko */
+/* Alaotsikko (tällä hetkellä ainoastaan tietovisa sivulla */
 .hero-subtitle {
   font-family: 'Allura', cursive;
   font-size: 60px;
@@ -107,7 +104,7 @@ main {
 }
 
 
-/*  NAVBAAR LINKIT */
+/* NAVBAR LINKIT */
 
 .navbar .nav-link {
   color: #fff !important;
@@ -117,6 +114,7 @@ main {
     0 0 20px rgba(46,136,255,0.8);
 }
 
+/* kun hiiri videään linkin päälle*/
 .navbar .nav-link:hover {
   color: #ee0ac8 !important;
   text-shadow:
@@ -125,61 +123,19 @@ main {
 }
 
 
-/*  säädetään toimimaan kaikilla laitteilla */
 
-@media (max-width: 992px) {
+/* FOOTER */
 
-  
-  .hero-content {
-    justify-content: flex-start;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  
-  .hero-header {
-    height: 320px;      /* matalampi puhelimella */
-  }
-
-  .hero-title {
-    font-size: 60px;    /* pienemmät fontit */
-  }
-
-  .hero-subtitle {
-    font-size: 32px;
-  }
+footer {
+  bottom: 0; /* näkymän alareunaan */
+  width: 100%; /* koko sivun leveys */
+  margin-top: auto; /* työntyy sivun loppuun */
+  margin-top: 130px !important; /* tyhjää tilaa footerin yläpuolelle */
 }
-
-@media (max-width: 600px) {
-
-  
-  .hero-content {
-    padding-top: 15px;
-    padding-bottom: 20px;
-  }
-  
-  
-  .hero-header {
-    height: 260px;
-
-  }
-
-  .hero-title {
-    font-size: 46px;
-  }
-
-  .hero-subtitle {
-    font-size: 26px;
-  }
-}
-
-
-
 
 
 
 /* PROFIILIKUVA ETUSIVULLA */
-
-
 
 .omakuva {
   width: 100%;
@@ -191,15 +147,8 @@ main {
 
 /* kun kursori kuvan päällä */
 .omakuva:hover {
-  transform: translateY(-6px) scale(1.03) rotate(0.5deg);
-  filter: drop-shadow(0 0 55px rgba(46,136,255,0.55));
+  box-shadow: 20px 20px 40px #a8c5eb, -20px -20px 40px #a8c5eb
 }
-
-
-
-
-
-
 
 
 
@@ -212,9 +161,8 @@ main {
   padding: 2rem;
   border-radius: 12px;
   color: white;
-
   box-shadow: 
-  0 0 150px rgba(46,136,255,0.25); /* hienovarainen sininen glow */
+  0 0 150px rgba(46,136,255,0.25); 
 }
 
 /* kun kursori on neu-boxin päällä */
@@ -244,14 +192,14 @@ main {
 .neu-box input[type="date"],
 .neu-box textarea {
   width: 80%;     /* 80 % laatikon sisätilasta */
-  background: white; /* Harmaa tausta */
-  border: none;    /* Ei reunaviivaa */
-  color: black;  /* valkoinen teksti */
-  padding: 0.4rem;  /* Sisätila kentän sisälle */
-  border-radius: 10px;  /* Pyöristetyt reunat */
-  margin-top: 5px;    /* Väli ylempään elementtiin */
-  margin: 5px auto;        /* keskitys vaakasuunnassa */
-  display: block;          /* Varmistaa että margin: auto toimii */
+  background: white;
+  border: none; /*ei reunaviivaa*/
+  color: black;
+  padding: 0.4rem;  /* sisätila kentän sisälle */
+  border-radius: 10px;
+  margin-top: 5px;  /* väli */
+  margin: 5px auto;  /* keskitys vaakasuunnassa */
+  display: block;   /* varmistaa että margin: auto toimii */
 }
 
 
@@ -260,7 +208,7 @@ main {
 .neu-box-visa { 
   background: rgba(0,0,0,0.3);
   border-radius: 12px; 
-  box-shadow: 0 0 150px rgba(46,136,255,0.20); /* hienovarainen sininen glow */
+  box-shadow: 0 0 150px rgba(46,136,255,0.20); 
   color: #eaeaea; 
   padding: 1.5rem 3rem; /* vähemmän pystysuuntaista, enemmän vaakasuuntaista tilaa */
   font-family: 'Poppins', sans-serif;
@@ -298,20 +246,15 @@ main {
 }
 
 
-.neu-box a {
-  word-break: break-all;       /* sallii pitkien linkkien katkeamisen */
-  overflow-wrap: anywhere;     /* varmistaa rivittymisen pienissä näytöissä */
-  display: inline-block;       /* varmempi rivittyminen */
-}
-
-
-
 /* Radiopainikkeiden tyyli */
 .neu-box-visa input[type="radio"] { 
   accent-color: #66ccff; /* Painikkeen valintaväri */
   margin-right: 10px; /* väli tekstin ja painikkeen väliin */
   transform: scale(1.2); /* pieni suurennus painikkeelle */
 }
+
+
+
 
 
 /* POKAALIANIMAATIO + VIDEO JOS TÄYDET PISTEET*/
@@ -415,7 +358,7 @@ a[href*="github.com"]:hover {
 
 /* TERVEYSSIVUSTO */
 
-/* Neu-boxin sisällä olevat lomakkeet esim BMI-laskuri */
+/* neu-boxin sisällä olevat lomakkeet esim BMI-laskuri */
 .neu-box form { 
   text-align: center; 
   margin-top: 1rem; 
@@ -424,7 +367,7 @@ a[href*="github.com"]:hover {
 
 
 
-/* LIIKUNTALAJEJEN BOXI */
+/* LIIKUNTALAJEN BOXI */
 
 /* jokaiselle lajille oma boxi */
 .lajikortti { 
@@ -457,18 +400,6 @@ a[href*="github.com"]:hover {
 
 }
 
-/* FOOTER */
-
-footer {
-  bottom: 0; /* näkymän alareunaan */
-  width: 100%; /* koko sivun leveys */
-  margin-top: auto; /* työntyy sivun loppuun */
-  margin-top: 130px !important; /* tyhjää tilaa footerin yläpuolelle */
-}
-
-
-
-
 
 
 
@@ -490,8 +421,7 @@ footer {
   backdrop-filter: blur(10px); /* Sumennusefekti taustalle */
 }
 
-/* #popup-id */
-/* Aktivoituu, kun käyttäjä klikkaa "Lue lisää" -painiketta */
+/* #popup-id, Aktivoituu kun käyttäjä klikkaa Lue lisää -painiketta */
 .overlay:target { 
   display: flex; 
 
@@ -505,11 +435,11 @@ footer {
   border-radius: 25px; 
   box-shadow: 1 0 30px #a8c5eb; 
   text-align: left; 
-  overflow-y: auto; /* Jos sisältöä on paljon, skrollautuu laatikon sisällä */
-  max-height: 85vh; /* Estää popupin ylittämästä näytön korkeutta */
+  overflow-y: auto; /* jos sisältöä on paljon, skrollautuu laatikon sisällä */
+  max-height: 85vh; /* estää popupin ylittämästä näytön korkeutta */
 }
 
-/* Sulje painike popupissa */
+/* sulje painike popupissa */
 .close-btn { 
   position: absolute;
   top: 20px; /* etäisyys yläreunasta */
@@ -536,22 +466,19 @@ button,
   border-radius: 25px; /* pyöristetyt kulmat */
   padding: 0.8rem 1.6rem; /* sisätila napin tekstille */
   font-weight: bold; /* lihavoitu teksti */
-  cursor: pointer; /* Hiiri muuttuu osoittimeksi napin päällä */
-
-  /* sininen hohde yhtenäinen visuaalinen teema headerin kanssa */
+  cursor: pointer; /* hiiri muuttuu osoittimeksi napin päällä */
   text-shadow:
     0 0 8px #2e88ff, /* lähempi hohto */
     0 0 16px #2e88ff, /* keskihohto */
     0 0 40px rgba(46,136,255,0.8); /* ulkokehä valo */
-
 
   box-shadow: 6px 6px 12px #0e0e0e, -6px -6px 12px #262626;
 }
 
 /* kun hiiri viedään kohdalle */
 button:hover, 
-.btn:hover { /* Hover myös .btn-luokalle */
-  transform: translateY(-3px); /* Nappi nousee hieman hoverissa */
+.btn:hover { 
+  transform: translateY(-3px); 
   text-shadow:
     0 0 10px #66aaff, 
     0 0 25px #2e88ff, 
@@ -559,3 +486,87 @@ button:hover,
   box-shadow: 12px 12px 20px #2e88ff, -12px -12px 20px #2e88ff;
   background: #222; 
 }
+
+
+/* github buttonit */
+.btn-git
+{ 
+  color: #fff !important; 
+  background: #1a1a1a; 
+  border: none; /* ei erillistä reunaviivaa */
+  border-radius: 25px; /* pyöristetyt kulmat */
+  padding: 0.8rem 1.6rem; /* sisätila napin tekstille */
+  font-weight: bold; /* lihavoitu teksti */
+  cursor: pointer; /* Hiiri muuttuu osoittimeksi napin päällä */
+  box-shadow: 6px 6px 12px #0e0e0e, -6px -6px 12px #262626;
+  transform: translateY(-3px);
+}
+
+
+/* btn-git hover */
+.btn-git:hover{
+  text-shadow:
+    0 0 10px #f0a3ec, 
+    0 0 25px #e7acd1, 
+    0 0 60px rgb(238, 188, 234); 
+  box-shadow: 12px 12px 20px #e99bcf, -12px -12px 20px #d88bc1;
+  background: #222; 
+}
+
+
+
+/*  säädetään toimimaan kaikilla laitteilla */
+
+@media (max-width: 992px) {
+
+  
+  .hero-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .hero-header {
+    height: 320px;      /* matalampi puhelimella */
+  }
+
+  .hero-title {
+    font-size: 60px;    /* pienemmät fontit */
+  }
+
+  .hero-subtitle {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  
+  .hero-content {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  
+  
+  .hero-header {
+    height: 260px;
+
+  }
+
+  .hero-title {
+    font-size: 46px;
+  }
+
+  .hero-subtitle {
+    font-size: 26px;
+  }
+}
+
+
+/* linkit */
+.neu-box a {
+  word-break: break-all;   /* sallii pitkien linkkien katkeamisen */
+  overflow-wrap: anywhere; /* varmistaa rivittymisen pienissä näytöissä */
+  display: inline-block;   /* varmempi rivittyminen */
+}
+

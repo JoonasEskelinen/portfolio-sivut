@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ota yhteyttä – Joonas Eskelinen</title>
+    <title>Joonas Eskelinen</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,9 +63,8 @@
     <!-- lomakkeen tallennus -->
     <?php
 
-    // Alustetaan muuttujat tyhjiksi, jotta voidaan täyttää lomake uudelleen tarvittaessa
+    // alustetaan muuttujat
     $nimi = $sahkoposti = $puhelin = $viesti = "";
-    $viesti_html = "";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       // Haetaan ja siivotaan syötteet
@@ -76,11 +75,11 @@
     
       //tarkistetaan että sähköposti oikein
       if (!filter_var($sahkoposti, FILTER_VALIDATE_EMAIL)) {
-        $virheviesti = "<div class='alert alert-danger mt-4'>Virheellinen sähköpostiosoite.</div>";
+        echo "<div class='alert alert-danger mt-4'>Virheellinen sähköpostiosoite.</div>";
       
       //tarkistetaan että kaikki kentät täytetty
       } elseif (empty($nimi) || empty($puhelin) || empty($viesti)) {
-        $virheviesti = "<div class='alert alert-danger mt-4'>Täytä kaikki kentät.</div>";
+        echo "<div class='alert alert-danger mt-4'>Täytä kaikki kentät.</div>";
       } else {
         //luodaan uusi rivi
         $rivi = str_replace(["\r", "\n"], " ", "$nimi, $sahkoposti, $puhelin, $viesti");
@@ -88,7 +87,7 @@
         // tallennetaan tiedostoon UTF-8-muodossa
         file_put_contents("yhteydenotot.txt", $rivi . PHP_EOL, FILE_APPEND | LOCK_EX);
 
-        $viesti_html = "<div class='alert alert-success mt-4'>Kiitos viestistäsi! 😊</div>";
+        echo "<div class='alert alert-success mt-4'>Kiitos viestistäsi! 😊</div>";
 
         // tyhjennetään kentät onnistuneen lähetyksen jälkeen
         $nimi = $sahkoposti = $puhelin = $viesti = "";
@@ -136,8 +135,6 @@
       </div>
     </form>
 
-    <!-- Viesti (onnistuminen tai virhe) -->
-    <?= $viesti_html ?>
   </div>
 </main>
 
@@ -145,7 +142,7 @@
 <footer class="bg-black text-white text-center py-4">
     <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
     <a href="mailto:joonas_eskelinen@hotmail.com" class="btn">Sähköposti</a>
-    <a href="https://github.com/JoonasEskelinen" class="btn">GitHub</a>
+    <a href="https://github.com/JoonasEskelinen" class="btn-git">GitHub</a>
 </footer>
 
 <!-- Bootstrap JS-->

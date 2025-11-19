@@ -76,6 +76,10 @@
 
     <!-- kysytään käyttäjältä paino ja pituus -->
     <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+     
+      <!-- piilokenttä jossa kerrotaan PHP:lle mistä lomakkeesta kyse (koska samalla sivulla myös liikuntapäiväkirja php)-->
+      <input type="hidden" name="form" value="bmi">
+    
       <div class="mb-3">
         <label for="paino">Paino (kg):</label><br>
         <input name="paino" id="paino" type="number" step="any" required>
@@ -91,13 +95,14 @@
 
     <?php
     // lasketaan painoindeksi php avulla ja tarkistetaan että tiedot on syötetty
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["paino"], $_POST["pituus"])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["form"] === "bmi") {
         
         // haetaan tiedot turvallisesti 
             $paino = filter_input(INPUT_POST, "paino", FILTER_VALIDATE_FLOAT);
             $pituus = filter_input(INPUT_POST, "pituus", FILTER_VALIDATE_FLOAT);
 
-        if ($paino && $pituus && $pituus > 0) {
+          //tarkistetaan onko luvut oikea ja suurempi kuin nolla
+            if ($paino && $pituus && $pituus > 0) {
                 $pituusmetrit = $pituus / 100;
                 $painoindeksi = ($paino * 1.3) / pow($pituusmetrit, 2.5);
 
@@ -106,13 +111,13 @@
 
             // lisätään kommentti painoindeksin mukaan
             if ($painoindeksi < 18.5) {
-                echo "<p>Olet alipainoinen.</p>";
+                echo "<p style='color:red;'>Olet alipainoinen.</p>";
             } elseif ($painoindeksi < 25) {
-                echo "<p>Paino on ihannealueella.</p>";
+                echo "<p style='color:green;'>Paino on ihannealueella";
             } elseif ($painoindeksi < 30) {
-                echo "<p>Paino on lievästi ylipainoinen.</p>";
+                echo "<p style='color:yellow;'>Paino on lievästi ylipainoinen.</p>";
             } else {
-                echo "<p>Paino on merkittävästi ylipainoinen.</p>";
+                echo "<p style='color:red;'>Paino on merkittävästi ylipainoinen.</p>";
             }
           }
           
@@ -138,7 +143,7 @@
 
     <?php
     // Jos lomake on lähetetty POST-metodilla
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["form"] === "paivakirja") {
 
         // Haetaan ja siistitään käyttäjän syötteet
         $nimi   = trim($_POST["nimi"] ?? "");
@@ -169,21 +174,25 @@
             }
             $rivi .= PHP_EOL; // rivinvaihto
 
-            // tallennetaan tiedostoon turvallisesti (lukitus estää kilpailutilanteet)
+            // tallennetaan tiedostoon turvallisesti
             file_put_contents($tiedosto, $rivi, FILE_APPEND | LOCK_EX);
 
             // tulostetaan onnistumisviesti turvallisesti
             echo "<p style='color:#00ff99;'>✅ Merkintä tallennettu nimellä " . htmlspecialchars($nimi, ENT_QUOTES, 'UTF-8') . "</p>";
 
         } else {
-            // --- Jos pakollinen kenttä puuttuu ---
+            // jos pakollinen kenttä puuttuu 
             echo "<p style='color:red;'>Täytä kaikki pakolliset kentät (nimimerkki, päivämäärä, laji ja kesto).</p>";
         }
     }
     ?>
 
-    <!-- Lomake -->
+    <!-- lomake -->
     <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+      
+     <!-- piilokenttä jossa kerrotaan PHP:lle mistä lomakkeesta kyse -->
+      <input type="hidden" name="form" value="paivakirja">
+
       <div class="mb-3">
         <label for="nimi">Nimi:</label><br>
         <input type="text" name="nimi" id="nimi" required>
@@ -312,7 +321,7 @@
 <footer class="bg-black text-white text-center py-4">
     <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
     <a href="mailto:joonas_eskelinen@hotmail.com" class="btn">Sähköposti</a>
-    <a href="https://github.com/JoonasEskelinen" class="btn">GitHub</a>
+    <a href="https://github.com/JoonasEskelinen" class="btn-git">GitHub</a>
 </footer>
 
 <!-- Bootstrap JS-->

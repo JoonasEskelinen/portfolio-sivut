@@ -2,7 +2,7 @@
 
 // Taulukko, jossa kaikki kysymykset ja oikeat vastaukset
 // "k" = kysymysteksti
-// "v" = vastausvaihtoehdot taulukkona
+// "v" = vastausvaihtoehdot
 // "oikein" = oikea vastaus
 $kysymykset = [
     ["k" => "Mikä yritys valmistaa iPhone-puhelimia?", "v" => ["Apple", "Samsung", "Huawei"], "oikein" => "Apple"],
@@ -23,13 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // siistitään nimimerkki, vain sallitut merkit
     $nimimerkki = trim($_POST["nimimerkki"] ?? '');
     $nimimerkki = preg_replace("/[^a-zA-Z0-9_]/", "", $nimimerkki);
+    
+    //luetaan vastaukset
     $vastaukset = $_POST["vastaukset"] ?? [];
     $pisteet = 0;                           
 
-    // Käydään kaikki kysymykset läpi
+    // Käydään kaikki kysymykset ja vaihtoehdot eli index läpi
     foreach ($kysymykset as $index => $kysymys) {
-        // jos valinta tehty ja se on oikea
+        // tarkastetaan onko valinta tehty ja onko se oikea
         if (isset($vastaukset[$index]) && $vastaukset[$index] === $kysymys["oikein"]) {
+            //jos oikea, lisätään piste
             $pisteet++;
         }
     }
@@ -48,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     file_put_contents("tietovisa.txt", $rivi, FILE_APPEND); 
 
 
-    //tulostetaan html näkymä, käytetään php:n heredoc-syntaksia (tällä ei tarvitse jokaista echo tulostusta erikseen, vaan tulostetaan koko html sellaisenaan)
+    //tulostetaan html näkymä, käytetään php:n heredoc-syntaksia jolla ei tarvitse jokaista echo tulostusta erikseen, vaan tulostetaan koko html sellaisenaan
     echo <<<HTML
     <!DOCTYPE html>
     <html lang="fi">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Joonas Eskelinen - Tietovisa</title>
+        <title>Joonas Eskelinen</title>
 
         <!-- Bootstrap, oma tyyli ja fontti -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
@@ -163,7 +166,7 @@ HTML;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joonas Eskelinen - Tietovisa</title>
+  <title>Joonas Eskelinen</title>
 
   <!-- Bootstrap, oma tyyli ja fontit -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
@@ -233,7 +236,7 @@ HTML;
          title="Vain kirjaimet, numerot ja alaviiva sallittu">
         </div>
 
-      <!-- tulostetaan kysymykset PHP:n avulla -->
+      <!-- tulostetaan kysymykset -->
       <?php foreach ($kysymykset as $index => $kysymys): ?>
         <div class="neu-box-visa mb-4">
           <h4><?= ($index + 1) . ". " . htmlspecialchars($kysymys["k"]); ?></h4>
@@ -262,7 +265,7 @@ HTML;
 <footer class="bg-black text-white text-center py-4">
     <p class="mb-0">© 2025 Joonas Eskelinen</p><br>
     <a href="mailto:joonas_eskelinen@hotmail.com" class="btn">Sähköposti</a>
-    <a href="https://github.com/JoonasEskelinen" class="btn">GitHub</a>
+    <a href="https://github.com/JoonasEskelinen" class="btn-git">GitHub</a>
 </footer>
 
 <!-- Bootstrap JS-->
