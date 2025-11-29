@@ -571,42 +571,57 @@ button:hover,
 }
 
 
-/* ----------------------------- */
-/*   MOBIILIN UUSI ETUSIVU-LAYOUT  */
-/* ----------------------------- */
 
-/* 600px leveydestä alaspäin */
+
+
+
+
+/* --------------------------------------- */
+/*   UNIVERSAALI MOBIILITYYLI KAIKILLE 
+     NEU-BOXEILLE KAIKILLA SIVUILLA       */
+/* --------------------------------------- */
+
 @media (max-width: 600px) {
 
-  /* Asetetaan kuva ja teksti vierekkäin */
-  #etusivu {
-    display: flex;
-    flex-direction: row;        /* vierekkäin */
-    gap: 15px;                  /* väliä elementtien väliin */
+  /* neu-box pienemmäksi mobiilissa */
+  .neu-box {
+    padding: 1rem;
+    margin-bottom: 20px;
+    border-radius: 10px;
   }
 
-  #etusivu .col-md-5,
-  #etusivu .col-md-7 {
-    flex: 1;                    /* molemmat vievät 50% */
-    max-width: 50%;
-    padding: 0;
+  .neu-box h3, .neu-box h4 {
+    font-size: 24px;
   }
 
-  /* pienempi profiilikuva mobiilissa */
+  .neu-box p {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* estää boxien venymisen liikaa */
+  .col-md-4, 
+  .col-md-6, 
+  .col-md-8,
+  .col-md-5,
+  .col-md-7 {
+    max-width: 100%;
+    flex: 0 0 100%;      /* täysi leveys mobiilissa */
+  }
+
+  /* kuvat mobiilissa siisteiksi */
+  .lajikuvat,
+  .omakuva {
+    max-width: 100%;
+    height: auto;
+  }
+
+    /* pienempi profiilikuva mobiilissa */
   .omakuva {
     max-width: 100%;
     width: 100%;
     border-radius: 10px;
   }
 
-  /* Tekstiboksi mukautuu pienemmälle alalle */
-  .etusivu-box {
-    padding: 1rem;
-    font-size: 18px;
-  }
 
-  .etusivu-box p {
-    font-size: 16px;
-    line-height: 1.4;
-  }
 }
