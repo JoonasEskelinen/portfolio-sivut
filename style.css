@@ -570,3 +570,43 @@ button:hover,
   display: inline-block;   /* varmempi rivittyminen */
 }
 
+
+/* ----------------------------- */
+/*   MOBIILIN UUSI ETUSIVU-LAYOUT  */
+/* ----------------------------- */
+
+/* 600px leveydestä alaspäin */
+@media (max-width: 600px) {
+
+  /* Asetetaan kuva ja teksti vierekkäin */
+  #etusivu {
+    display: flex;
+    flex-direction: row;        /* vierekkäin */
+    gap: 15px;                  /* väliä elementtien väliin */
+  }
+
+  #etusivu .col-md-5,
+  #etusivu .col-md-7 {
+    flex: 1;                    /* molemmat vievät 50% */
+    max-width: 50%;
+    padding: 0;
+  }
+
+  /* pienempi profiilikuva mobiilissa */
+  .omakuva {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  /* Tekstiboksi mukautuu pienemmälle alalle */
+  .etusivu-box {
+    padding: 1rem;
+    font-size: 18px;
+  }
+
+  .etusivu-box p {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+}
